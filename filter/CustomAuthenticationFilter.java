@@ -16,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -61,7 +60,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withClaim("roles", user.getAuthorities().stream()
                                                         .map(GrantedAuthority::getAuthority)
                                                         .collect(Collectors.toList()))
-                .sign(algorithm);
+                .sign(null);
 
         String refresh_token = JWT.create()
                 .withSubject(user.getUsername())
